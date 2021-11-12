@@ -21,7 +21,7 @@ exports.costume_detail = async function(req, res) {
         res.send(result) 
     } catch (error) { 
         res.status(500) 
-        res.send(`{"error": document for id ${req.params.id} not found`); 
+        res.send(`{"error": document for id ${req.params.id} not found`);
     } 
 }; 
  
