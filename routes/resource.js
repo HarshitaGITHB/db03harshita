@@ -31,3 +31,6 @@ router.get('/costumes/:id', costume_controller.costume_detail);
 // GET request for list of all Costume items. 
  
 module.exports = router; 
+
+// GET request for one costume. 
+router.get('/costumes/:id', costume_controller.costume_detail);

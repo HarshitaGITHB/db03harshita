@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var costume = require("./models/costume");
 
 const connectionString = process.env.MONGO_CON 
 mongoose = require('mongoose'); 
@@ -47,7 +48,8 @@ app.use('/palanquin', palanquinRouter);
 app.use('/addmods', addmodsRouter);
 app.use('/selector', selectorRouter);
 app.use('/resource', resoureRouter);
-app.use('/costumes', costumeRouter);
+app.use('/costume', costumeRouter);
+app.use('/', resoureRouter);
 
 
 
