@@ -15,22 +15,15 @@ block content
       alert('Purchased Item: ' + x)
    } 
 
-  div(class='container-fluid')
-    div(class="d-flex justify-content-end")
-
-    div(class="p-3 mb-2 bg-dark text-white row")
-      each item in costume 
-        div(class="col-sm-2") #{item} :
-
+  div(class='container')
     
+ 
     each o, index in items
-      div(class="card text-dark bg-warning mb-3" class='col' class='card' class='card-body' class='card-text' onclick='buy('+index+')') #{o}
-        
-          div(class='col-sm-2') #{o.costume_type}
-          div(class='col-sm-2') #{o.size}
-          div(class='col-sm-2') $ #{o.cost}
-          div(class='col-sm-6')
-            //- div(class='col-sm-3' onclick='buy('+index+')') #{o} 
-            a(href = "costume/detail/?id=" + o._id)    detail --
-            a(href = "costume/update/?id=" + o._id)    update --
-            a(href = "costume/delete/?id=" + o._id)    delete      
+      div(class="card" style="width: 30rem;" onclick='buy('+index+')') 
+        div(class="card-body text-center")        
+          div(class='display-4 text-uppercase') #{o.costume_type}
+          div(class='display-6') #{o.size}
+          div(class='display-6') $ #{o.cost}
+          a(href = "costume/detail/?id=" + o._id class="btn btn-primary")    Detail
+          a(href = "costume/update/?id=" + o._id class="btn btn-secondary")    Update 
+          a(href = "costume/delete/?id=" + o._id class="btn btn-danger")    Delete      
