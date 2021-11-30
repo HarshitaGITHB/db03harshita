@@ -44,22 +44,23 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/palanquin', palanquinRouter); 
-app.use('/addmods', addmodsRouter);
-app.use('/selector', selectorRouter);
-app.use('/resource', resoureRouter);
-app.use('/costume', costumeRouter);
-app.use('/', resoureRouter);
 
 
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
 
+passport.use(new LocalStrategy( 
+  function(username, password, done) { 
+    Account.findOne({ username: username }, function (err, user) { 
+      if (err) { return done(err); } 
+      if (!user) { 
+        return done(null, false, { message: 'Incorrect username.' }); 
+      } 
+      if (!user.validPassword(password)) { 
+        return done(null, false, { message: 'Incorrect password.' }); 
+      } 
+      return done(null, user); 
+    }); 
+  }))
 app.use(require('express-session')({ 
   secret: 'keyboard cat', 
   resave: false, 
@@ -77,20 +78,24 @@ passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser()); 
 passport.deserializeUser(Account.deserializeUser()); 
 
-passport.use(new LocalStrategy( 
-  function(username, password, done) { 
-    Account.findOne({ username: username }, function (err, user) { 
-      if (err) { return done(err); } 
-      if (!user) { 
-        return done(null, false, { message: 'Incorrect username.' }); 
-      } 
-      if (!user.validPassword(password)) { 
-        return done(null, false, { message: 'Incorrect password.' }); 
-      } 
-      return done(null, user); 
-    }); 
-  }))
 
+
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/palanquin', palanquinRouter); 
+app.use('/addmods', addmodsRouter);
+app.use('/selector', selectorRouter);
+app.use('/resource', resoureRouter);
+app.use('/costume', costumeRouter);
+app.use('/', resoureRouter);
+
+
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
