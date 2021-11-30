@@ -23,8 +23,6 @@ db.once("open", function(){
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var palanquinRouter = require('./routes/palanquin');
-var palanquinRouter = require('./routes/palanquin');
 var addmodsRouter = require('./routes/addmods');
 const Costume = require("./models/costume");
 const resoureRouter = require('./routes/resource');
@@ -83,7 +81,7 @@ passport.deserializeUser(Account.deserializeUser());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/palanquin', palanquinRouter); 
+
 app.use('/addmods', addmodsRouter);
 app.use('/selector', selectorRouter);
 app.use('/resource', resoureRouter);

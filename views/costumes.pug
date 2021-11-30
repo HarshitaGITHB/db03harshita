@@ -15,16 +15,14 @@ block content
       alert('Purchased Item: ' + x)
    } 
 
-  div(class='container')
-    
- 
+  div(class='container d-flex')
     each o, index in items
       div(class="card" style="width: 30rem;" onclick='buy('+index+')') 
         div(class="card-body text-center")        
           div(class='display-4 text-uppercase') #{o.costume_type}
           div(class='display-6') #{o.size}
           div(class='display-6') $ #{o.cost}
-          
+
           a(href = "costume/detail/?id=" + o._id class="btn btn-primary")    Detail
           a(href = "costume/update/?id=" + o._id class="btn btn-secondary")    Update 
           a(href = "costume/delete/?id=" + o._id class="btn btn-danger")    Delete      
